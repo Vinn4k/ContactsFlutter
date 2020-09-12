@@ -139,7 +139,7 @@ final nameFocus=FocusNode();
       builder: (context){
         return AlertDialog(
           title: Text("Descartar Alterações?"),
-          content: Text("Todas Alteraçoes serão Perdidas"),
+          content: Text("Todas Alterações serão Perdidas"),
           actions: <Widget>[
             FlatButton(
               child: Text("Cancelar"),

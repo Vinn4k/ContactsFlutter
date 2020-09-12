@@ -139,7 +139,7 @@ final nameFocus=FocusNode();
       builder: (context){
         return AlertDialog(
           title: Text("Descartar Alterações?"),
-          content: Text("Todas Alterações serão Perdidas"),
+          content: Text("Todas Alterações Serão Perdidas"),
           actions: <Widget>[
             FlatButton(
               child: Text("Cancelar"),
@@ -148,7 +148,7 @@ final nameFocus=FocusNode();
               },
             ),
             FlatButton(
-              child: Text("Continuar?"),
+              child: Text("Continuar ?"),
               onPressed: (){
                 Navigator.pop(context);
                 Navigator.pop(context);

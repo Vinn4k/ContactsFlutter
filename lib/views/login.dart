@@ -7,6 +7,14 @@ class LoginPgae extends StatefulWidget {
 class _LoginPgaeState extends State<LoginPgae> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Column(
+        
+        children: [
+          Text('teste')
+        ],
+      ),
+      
+    );
   }
 }

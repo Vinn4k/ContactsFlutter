@@ -1,9 +1,10 @@
+import 'package:alltolkit/views/login.dart';
 import 'package:flutter/material.dart';
 import 'views/home_page.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: HomePage(),
+    home: LoginPgae(),
     debugShowCheckedModeBanner: false,
 
   ));

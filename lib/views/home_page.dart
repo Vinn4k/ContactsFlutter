@@ -78,6 +78,7 @@ class _HomePageState extends State<HomePage> {
           child: Row(
             children: <Widget>[
               Container(
+
                 width: 80.0,
                 height: 80.0,
 

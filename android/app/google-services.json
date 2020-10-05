@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "997889161225",
+    "firebase_url": "https://contacts9147.firebaseio.com",
+    "project_id": "contacts9147",
+    "storage_bucket": "contacts9147.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997889161225:android:f2ef35919f7599e64f20d8",
+        "android_client_info": {
+          "package_name": "com.vinntek.alltolkit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997889161225-muemsl6nnmo1badh4dnkao8qugsqhmmd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vinntek.alltolkit",
+            "certificate_hash": "f254617842c899b6b4a613f23c1266030794a7fd"
+          }
+        },
+        {
+          "client_id": "997889161225-kjuj9qjft9uvi85m1s2obdajfnr55je1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfUU5REp-8xHBlSO6K_b0-HPaA4APawi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997889161225-kjuj9qjft9uvi85m1s2obdajfnr55je1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

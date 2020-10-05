@@ -31,6 +31,11 @@ dependencies:
   sqflite: ^1.1.5
   url_launcher: any
   image_picker: any
+  cloud_firestore: ^0.13.0+1
+  google_sign_in: ^4.1.1
+  firebase_storage: ^3.1.1
+  firebase_auth: ^0.15.3
+
 
 dev_dependencies:
   flutter_test:

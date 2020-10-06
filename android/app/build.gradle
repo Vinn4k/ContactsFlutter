@@ -36,6 +36,7 @@ android {
         applicationId "com.vinntek.alltolkit"
         minSdkVersion 16
         targetSdkVersion 28
+        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

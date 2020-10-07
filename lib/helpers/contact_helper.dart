@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -41,6 +42,7 @@ class ContactHelper{
     Future<Contact> saveContact(Contact contact)   async {
     Database dbContact=await db;
     contact.id= await dbContact.insert(contactTable, contact.toMap())   ;
+    Firestore.instance.collection("user"). document("Emison").collection("Contacts").document(contact.name).setData(contact.toMap());
     return contact;
     }
     Future<Contact> getContact(int id)async{
@@ -51,24 +53,32 @@ class ContactHelper{
         whereArgs: [id]) ;
     if(maps.length>0)     {
       return Contact.fromMap(maps.first) ;
+
     }  else{return null;
     }
 
     }
-  Future<int>  deleteContact(int id)  async{
+
+  Future<int>  deleteContact(int id )  async{
     Database dbContact=await db;  
   await  dbContact.delete(contactTable,where: "$idColumn =?",whereArgs: [id]);
-    }
+
+  }
+
   Future<int>   updateContact (Contact contact)async{
     Database dbContact=await db;  
     await dbContact.update(contactTable, contact.toMap(),where: "$idColumn =?", whereArgs: [contact.id]) ;
-    
-}
+    Firestore.instance.collection("user"). document("Emison").collection("Contacts").document(contact.name).updateData(contact.toMap());
+
+
+  }
  Future<List>  getAllContacts () async{
     Database dbContact=await db;  
     List listMap=await dbContact.rawQuery("SELECT * FROM contactTable")  ;
+
+
     List<Contact> listContact=List() ;
-    for(Map m in listMap){
+    for(Map m in listMap ){
       listContact.add(Contact.fromMap(m))  ;
     }
     return listContact;

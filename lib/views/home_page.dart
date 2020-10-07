@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:alltolkit/helpers/contact_helper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'cadasPage.dart';
+import 'login.dart';
 
 enum orderOptions{orderaz,orderza}
 
@@ -23,12 +25,11 @@ class _HomePageState extends State<HomePage> {
     _getAllcontacts();
 
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Contatos"),
+        title: Text("Contatos. "),
         backgroundColor: Color(0xffe74645),
         centerTitle: true,
         actions: <Widget>[
@@ -40,6 +41,10 @@ class _HomePageState extends State<HomePage> {
               ),
               const PopupMenuItem<orderOptions>(
                 child: Text("Za"),
+                value: orderOptions.orderza,
+              ),
+              const PopupMenuItem<orderOptions>(
+                child: Text("Deslogar"),
                 value: orderOptions.orderza,
               ),
 

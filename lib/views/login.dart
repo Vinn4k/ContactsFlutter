@@ -10,40 +10,57 @@ class LoginPgae extends StatefulWidget {
 }
 
 class _LoginPgaeState extends State<LoginPgae> {
+
   final GoogleSignIn googleSignIn=GoogleSignIn();
   FirebaseUser _currentUser;
+
 
   @override
   void initState() {
     super.initState();
+
     FirebaseAuth.instance.onAuthStateChanged.listen((user) {
-      setState(() {
-        _currentUser=user;
-      });
+        _currentUser= user;
+
+        if(_currentUser !=null){
+          Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(builder: (context){
+            return HomePage();
+          }));
 
 
+        }
     });
 
-
   }
-
+  String name;
   Future<FirebaseUser> _getuser() async{
     if(_currentUser !=null)return _currentUser;
     try{
 
-      final GoogleSignInAccount googleSignInAccount= await googleSignIn.signIn();
-      final GoogleSignInAuthentication googleSignInAuthentication=await googleSignInAccount.authentication;
+      final GoogleSignInAccount googleSignInAccount=
+            await googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication=
+            await googleSignInAccount.authentication;
       final AuthCredential credential=GoogleAuthProvider.getCredential(
         idToken: googleSignInAuthentication.idToken,
-        accessToken: googleSignInAuthentication.accessToken,);
-      final AuthResult authResult=await FirebaseAuth.instance.signInWithCredential(credential);
+        accessToken: googleSignInAuthentication.accessToken,
+      );
+      final AuthResult authResult=
+              await FirebaseAuth.instance.signInWithCredential(credential);
       final FirebaseUser user= authResult.user;
+      name=_currentUser.displayName;
+
       return user;
+
     }catch (error){
       return null;
 
     }
+
   }
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -86,10 +103,13 @@ class _LoginPgaeState extends State<LoginPgae> {
                         onPressed:() async{
 
                        final  FirebaseUser user=await _getuser();
-                       print("###############");
+                       if (_currentUser !=null){
+                         Navigator.pop(context);
+                         Navigator.push(context, MaterialPageRoute(builder: (context){
+                           return HomePage();
+                         }));
 
-                       print(user);
-                       print("###############");
+                       }
 
                         },
                       )

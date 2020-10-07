@@ -4,6 +4,7 @@ import 'package:alltolkit/helpers/contact_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+
 class ContactPage extends StatefulWidget {
 
   final Contact contact;

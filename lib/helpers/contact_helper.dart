@@ -42,7 +42,6 @@ class ContactHelper{
     Future<Contact> saveContact(Contact contact)   async {
     Database dbContact=await db;
     contact.id= await dbContact.insert(contactTable, contact.toMap())   ;
-    Firestore.instance.collection("user"). document("Emison").collection("Contacts").document(contact.name).setData(contact.toMap());
     return contact;
     }
     Future<Contact> getContact(int id)async{
@@ -74,7 +73,8 @@ class ContactHelper{
   }
  Future<List>  getAllContacts () async{
     Database dbContact=await db;  
-    List listMap=await dbContact.rawQuery("SELECT * FROM contactTable")  ;
+    List listMap=await dbContact.rawQuery("SELECT * FROM contactTable")
+
 
 
     List<Contact> listContact=List() ;

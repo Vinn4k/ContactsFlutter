@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import 'Home2.dart';
 class LoginPgae extends StatefulWidget {
   @override
   _LoginPgaeState createState() => _LoginPgaeState();
@@ -25,7 +27,7 @@ class _LoginPgaeState extends State<LoginPgae> {
         if(_currentUser !=null){
           Navigator.pop(context);
           Navigator.push(context, MaterialPageRoute(builder: (context){
-            return HomePage();
+            return HomePage1();
           }));
 
 
@@ -106,7 +108,7 @@ class _LoginPgaeState extends State<LoginPgae> {
                        if (_currentUser !=null){
                          Navigator.pop(context);
                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                           return HomePage();
+                           return HomePage1();
                          }));
 
                        }

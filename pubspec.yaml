@@ -35,11 +35,18 @@ dependencies:
   google_sign_in: ^4.1.1
   firebase_storage: ^3.1.1
   firebase_auth: ^0.15.3
-
+  advance_pdf_viewer: any
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  flutter_launcher_icons: any
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "img/icon.png"
+
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -58,8 +65,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - img/all.png
-    - img/elfa.svg
-    - img/ha.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

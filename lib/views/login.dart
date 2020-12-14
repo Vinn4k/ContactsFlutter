@@ -1,11 +1,10 @@
 import 'package:alltolkit/views/home_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import 'Home2.dart';
+
 class LoginPgae extends StatefulWidget {
   @override
   _LoginPgaeState createState() => _LoginPgaeState();
@@ -14,7 +13,7 @@ class LoginPgae extends StatefulWidget {
 class _LoginPgaeState extends State<LoginPgae> {
 
   final GoogleSignIn googleSignIn=GoogleSignIn();
-  FirebaseUser _currentUser;
+  FirebaseUser currentUser;
 
 
   @override
@@ -22,12 +21,12 @@ class _LoginPgaeState extends State<LoginPgae> {
     super.initState();
 
     FirebaseAuth.instance.onAuthStateChanged.listen((user) {
-        _currentUser= user;
+        currentUser= user;
 
-        if(_currentUser !=null){
+        if(currentUser !=null){
           Navigator.pop(context);
           Navigator.push(context, MaterialPageRoute(builder: (context){
-            return HomePage1();
+            return HomePage();
           }));
 
 
@@ -37,7 +36,7 @@ class _LoginPgaeState extends State<LoginPgae> {
   }
   String name;
   Future<FirebaseUser> _getuser() async{
-    if(_currentUser !=null)return _currentUser;
+    if(currentUser !=null)return currentUser;
     try{
 
       final GoogleSignInAccount googleSignInAccount=
@@ -51,7 +50,7 @@ class _LoginPgaeState extends State<LoginPgae> {
       final AuthResult authResult=
               await FirebaseAuth.instance.signInWithCredential(credential);
       final FirebaseUser user= authResult.user;
-      name=_currentUser.displayName;
+      name=currentUser.displayName;
 
       return user;
 
@@ -105,10 +104,10 @@ class _LoginPgaeState extends State<LoginPgae> {
                         onPressed:() async{
 
                        final  FirebaseUser user=await _getuser();
-                       if (_currentUser !=null){
+                       if (currentUser !=null){
                          Navigator.pop(context);
                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                           return HomePage1();
+                           return HomePage();
                          }));
 
                        }

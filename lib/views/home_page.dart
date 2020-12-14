@@ -25,12 +25,24 @@ class _HomePageState extends State<HomePage> {
     _getAllcontacts();
 
   }
+
+  static const cor1 =0xff86dab7;
+  static const cor2 =0xff59b48f;
+  static const cor3 =0xff0eb269;
+  static const branco =0xfff2f9f6;
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Contatos. "),
-        backgroundColor: Color(0xffe74645),
+        backgroundColor: Color(cor1),
         centerTitle: true,
         actions: <Widget>[
           PopupMenuButton<orderOptions>(

@@ -1,15 +1,18 @@
 import 'dart:io';
-
+import 'package:expansion_card/expansion_card.dart';
 import 'package:alltolkit/helpers/contact_helper.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'cadasPage.dart';
-import 'login.dart';
+
+
+
+
 
 enum orderOptions{orderaz,orderza}
 
 class HomePage extends StatefulWidget {
+  static String tag='Home-Page';
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -30,7 +33,10 @@ class _HomePageState extends State<HomePage> {
   static const cor2 =0xff59b48f;
   static const cor3 =0xff0eb269;
   static const branco =0xfff2f9f6;
-
+  static int _currentindex=0;
+  static final pages=[
+    ContactPage.tag
+  ];
 
 
 
@@ -42,7 +48,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Contatos. "),
-        backgroundColor: Color(cor1),
+        backgroundColor: Color(cor3),
         centerTitle: true,
         actions: <Widget>[
           PopupMenuButton<orderOptions>(
@@ -82,134 +88,154 @@ class _HomePageState extends State<HomePage> {
           }
 
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color(cor3),
+        currentIndex: _currentindex,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_circle_outline),
+            title: Text("Adicionar"),
+        backgroundColor: Colors.amber
+
+
+    ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text("data"),
+              backgroundColor: Color(cor3)
+          ),
+        ],
+        onTap: (int i){
+          _currentindex=i;
+        Navigator.of(context).pushNamed(pages[_currentindex]);
+        },
+
+      ),
     );
   }
   Widget _ContactCard(BuildContext context,int index){
-    return GestureDetector(
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0)
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Row(
-            children: <Widget>[
-              Container(
+    return Card(
+      color: Color(cor2),
+      child: GestureDetector(
 
-                width: 80.0,
-                height: 80.0,
+        child: ExpansionCard(
 
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: contacts[index].img !=null ? 
-                      FileImage(File(contacts[index].img)):
-                          AssetImage("img/all.png"),
-                       fit: BoxFit.cover
 
+       title: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Row(
+              children: <Widget>[
+                Container(
+
+                  width: 80.0,
+                  height: 80.0,
+
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.rectangle,
+                    image: DecorationImage(
+                        image: contacts[index].img !=null ?
+                        FileImage(File(contacts[index].img)):
+                            AssetImage("img/all.png"),
+                         fit: BoxFit.cover
+
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left:10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(contacts[index].name ??"",
-                    style: TextStyle(
-                        color: Colors.black,
-                      fontSize: 22.0, fontWeight: FontWeight.bold
-                    ),
-                    ),
-                    Text(contacts[index].email ??"",
+                Padding(
+                  padding: EdgeInsets.only(left:10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(contacts[index].name ??"",
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 18.0, fontWeight: FontWeight.w400
+                        fontSize: 22.0, fontWeight: FontWeight.bold
                       ),
-                    ),
-                    Text(contacts[index].phone ??"",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 22.0, fontWeight: FontWeight.w400
                       ),
-                    ),
-                  ],
+                      Text(contacts[index].email ??"",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18.0, fontWeight: FontWeight.w400
+                        ),
+                      ),
+                      Text(contacts[index].phone ??"",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 22.0, fontWeight: FontWeight.w400
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              )
 
-            ],
+              ],
+            ),
           ),
+          children: [
+            Container(
+              child: Center(
+
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child:   FlatButton(
+                            color: Color(branco),
+                            child:Icon(Icons.call, color: Color(cor3),),
+                            onPressed: (){
+                              launch("tel: ${contacts[index].phone}");
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: FlatButton(
+                            color: Color(branco),
+                            child:Icon(Icons.edit, color: Color(cor3),),
+                            onPressed: (){
+                              Navigator.pop(context);
+                              _ShowContactpage(contact: contacts[index]);
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: FlatButton(
+                            color: Color(branco),
+                            child:Icon(Icons.delete, color: Color(cor3),),
+                            onPressed: (){
+                              helper.deleteContact(contacts[index].id);
+                              setState(() {
+                                contacts.removeAt(index);
+                                Navigator.pop(context);
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+
+
+              ),
+            )
+
+          ],
         ),
+        onTap: (){
+
+        },
       ),
-      onTap: (){
-        _showOptions(context,index);
-      },
+
     );
   }
-  void _showOptions(BuildContext context,int index){
-  showModalBottomSheet(
-      context: context,
-    builder: (context){
-        return BottomSheet(
-          onClosing: (){},
-          builder: (context){
-            return Container(
-              padding: EdgeInsets.all(10.0),
-              child: Row(
-               mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child:   FlatButton(
-                    color: Colors.green,
-                    child:Text("Ligar",
-                      style: TextStyle(color: Colors.white,fontSize: 20.0),
-                    ),
-                    onPressed: (){
-                      launch("tel: ${contacts[index].phone}");
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
-                  Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: FlatButton(
-                      color: Color(0xfffb7756),
-                      child:Text("Editar",
-                        style: TextStyle(color:Colors.white ,fontSize: 20.0),
-                      ),
-                      onPressed: (){
-                        Navigator.pop(context);
-                        _ShowContactpage(contact: contacts[index]);
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: FlatButton(
-                      color: Colors.redAccent,
-                      child:Text("Excluir",
-                        style: TextStyle(color: Colors.white,fontSize: 20.0),
-                      ),
-                      onPressed: (){
-                        helper.deleteContact(contacts[index].id);
-                     setState(() {
-                       contacts.removeAt(index);
-                       Navigator.pop(context);
-                     });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
 
-        );
-    }
-  );
-  }
+
   void _ShowContactpage ({Contact contact}) async {
  final recContact=  await Navigator.push(context,
      MaterialPageRoute(builder: (context) => ContactPage(contact: contact,)),

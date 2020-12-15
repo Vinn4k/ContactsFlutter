@@ -37,6 +37,8 @@ dependencies:
   firebase_auth: ^0.15.3
   advance_pdf_viewer: any
   cached_network_image: ^2.3.3
+  expansion_card: ^0.1.0
+
 
 
 dev_dependencies:

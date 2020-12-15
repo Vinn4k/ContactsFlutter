@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 
 
 class ContactPage extends StatefulWidget {
+  static String tag='Cadas-Page';
 
   final Contact contact;
   ContactPage({this.contact});
@@ -20,7 +21,8 @@ class _ContactPageState extends State<ContactPage> {
   final _phoneCOntroler = TextEditingController();
 
 
-Contact _editedContact;
+
+  Contact _editedContact;
 bool _userEdited=false;
 final nameFocus=FocusNode();
 
